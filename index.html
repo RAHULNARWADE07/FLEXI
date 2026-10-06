@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AquaAgent: Autonomous Smart Water Conservation Assistant powered by Google Gemini and Automated Valve Control.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='20' font-size='20'>💧</text></svg>">
+  <title>Smart Water Conservation Assistant | Agentic AI & Automation</title>
+  <!-- Clean Modern Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Top Header -->
+    <header class="header">
+      <div class="header-title">
+        <span class="logo-emoji">💧</span>
+        <div>
+          <h1>Smart Water Conservation Assistant</h1>
+          <p class="subtitle">Agentic AI & Automation Project (Powered by Google Gemini)</p>
+        </div>
+      </div>
+      
+      <!-- API Key Setting -->
+      <div class="api-key-box">
+        <input type="password" id="apiKeyInput" placeholder="Paste Gemini API Key (optional)" />
+        <button id="btnSaveKey" onclick="saveApiKey()">Connect Gemini</button>
+      </div>
+    </header>
+
+    <!-- Main 3-Column Layout -->
+    <div class="grid-3">
+      
+      <!-- 1. LIVE WATER STATUS -->
+      <div class="card">
+        <div class="card-header">
+          <h3>📊 Live Water Status</h3>
+          <span id="systemBadge" class="status-pill green">Normal</span>
+        </div>
+
+        <div class="tank-container">
+          <div class="tank-wrapper">
+            <div id="tankFill" class="tank-fill" style="height: 85%;"></div>
+            <span id="tankLevelText" class="tank-label">85%</span>
+          </div>
+          <div class="tank-details">
+            <p>Water Tank Level: <strong id="tankDetailText">85% Full</strong></p>
+            <p>Main Water Valve: <strong id="valveDetailText" class="text-green">OPEN</strong></p>
+            <p>Total Water Saved: <strong id="waterSavedText" class="text-blue">1,250 Liters</strong></p>
+          </div>
+        </div>
+
+        <div class="flow-meter">
+          <span class="flow-label">Water Flow Rate:</span>
+          <div class="flow-value-row">
+            <span id="flowRateVal" class="flow-number">20</span>
+            <span class="flow-unit">Liters / min</span>
+          </div>
+          <p id="flowStatusText" class="flow-desc">Normal baseline flow (15 - 25 L/min)</p>
+        </div>
+
+        <div class="manual-valve-controls">
+          <span>Manual Override:</span>
+          <div class="btn-group">
+            <button class="btn-sm" onclick="setValve('OPEN')">Open Valve</button>
+            <button class="btn-sm btn-danger" onclick="setValve('CLOSE')">Close Valve</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. AGENTIC AI WORKFLOW -->
+      <div class="card highlight-card">
+        <div class="card-header">
+          <h3>🤖 How the AI Agent Works</h3>
+          <span class="status-pill blue">Agentic AI Loop</span>
+        </div>
+
+        <div class="agent-steps">
+          <div class="step-item" id="step1">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <strong>Sensor Monitor Agent</strong>
+              <p>Constantly checks water flow rate and tank level.</p>
+            </div>
+          </div>
+
+          <div class="step-item" id="step2">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <strong>Gemini Decision Agent</strong>
+              <p>Analyzes if flow rate is dangerous and decides action.</p>
+            </div>
+          </div>
+
+          <div class="step-item" id="step3">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <strong>Automation Agent</strong>
+              <p>Autonomously closes smart valve to stop water wastage.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agent Thought / Decision Box -->
+        <div class="agent-decision-box">
+          <span class="decision-title">🧠 Gemini Agent Reasoning:</span>
+          <p id="agentReasoningText">"Normal water flow detected. All parameters within safe limits. Monitoring active."</p>
+        </div>
+
+        <button id="btnRunAgent" class="btn-primary" onclick="runAiAgent()">
+          ⚡ Run Agent Inspection Now
+        </button>
+      </div>
+
+      <!-- 3. SIMULATION CONTROLS & LOGS -->
+      <div class="card">
+        <div class="card-header">
+          <h3>🎮 Quick Demonstration</h3>
+          <span class="status-pill purple">Viva Testing</span>
+        </div>
+
+        <p class="section-desc">Click below to simulate real-world water events and see the AI agent react:</p>
+
+        <div class="demo-buttons">
+          <button class="btn-demo btn-leak" onclick="simulateLeak()">
+            💥 1. Simulate Pipe Leak
+            <small>Spikes flow to 85 L/min</small>
+          </button>
+
+          <button class="btn-demo btn-fix" onclick="runAiAgent()">
+            🤖 2. Auto-Fix with AI Agent
+            <small>Gemini analyzes & closes valve</small>
+          </button>
+
+          <button class="btn-demo btn-reset" onclick="resetSystem()">
+            🔄 3. Reset to Normal
+            <small>Restore normal 20 L/min flow</small>
+          </button>
+        </div>
+
+        <h4 class="log-title">Recent Agent Actions:</h4>
+        <div id="logContainer" class="log-list">
+          <div class="log-item">System started. Monitoring active.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom: Gemini AI Chat Assistant -->
+    <section class="card chat-card">
+      <div class="card-header">
+        <h3>💬 Ask the Gemini Water Conservation Assistant</h3>
+        <span class="status-pill green">AI Assistant Ready</span>
+      </div>
+
+      <div class="quick-chips">
+        <button class="chip" onclick="askQuick('How can I save water at home?')">💧 Tips to save water</button>
+        <button class="chip" onclick="askQuick('Why did the agent close the valve?')">❓ Why was valve closed?</button>
+        <button class="chip" onclick="askQuick('How does Agentic AI work in this project?')">🤖 Explain Agentic AI</button>
+      </div>
+
+      <div id="chatHistory" class="chat-history">
+        <div class="chat-msg bot">
+          <strong>AquaBot:</strong> Hello! I am your Smart Water Conservation Assistant. Ask me any question about water conservation or how our AI agent protects against leaks!
+        </div>
+      </div>
+
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Type a question (e.g., 'Give me 3 water saving tips')..." onkeydown="if(event.key === 'Enter') sendChatMessage()" />
+        <button class="btn-send" onclick="sendChatMessage()">Ask Gemini</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
