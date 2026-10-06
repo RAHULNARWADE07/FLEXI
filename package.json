@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "deploy": "node scripts/deploy.js"
   },
   "keywords": ["agentic-ai", "automation", "gemini", "water-conservation", "iot", "multi-agent"],
   "type": "commonjs",

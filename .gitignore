@@ -12,3 +12,6 @@ npm-debug.log*
 # OS Generated Files
 .DS_Store
 Thumbs.db
+
+# Deploy temp
+.deploy_temp/

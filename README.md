@@ -2,6 +2,9 @@
 ### **Subject:** Agentic AI and Automation
 **A Simple, Intuitive Project Powered by Google Gemini and Automated Valve Control**
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-rahulnarwade07.github.io%2FFLEXI-0284c7?style=for-the-badge&logo=githubpages&logoColor=white)](https://rahulnarwade07.github.io/FLEXI/)
+[![Repository](https://img.shields.io/badge/GitHub-RAHULNARWADE07%2FFLEXI-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/RAHULNARWADE07/FLEXI)
+
 ---
 
 ## 🎯 What is this Project? (In 2 Minutes)
